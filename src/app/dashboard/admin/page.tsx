@@ -11,7 +11,7 @@ export default function AdminDashboard() {
           <tr className="bg-gray-100">
             <th className="p-2 border">Name</th>
             <th className="p-2 border">Email</th>
-            <th className="p-2 border">Total Leaves</th>
+            <th className="p-2 border">Total Leaves</th> 
             <th className="p-2 border">Used Leaves</th>
           </tr>
         </thead>
