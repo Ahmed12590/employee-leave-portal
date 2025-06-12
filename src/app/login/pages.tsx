@@ -1,28 +1,35 @@
+// src/app/login/page.tsx
+
 'use client';
 
-import { useState } from 'react'
-import { supabase } from '@/lib/supabaseClient'
-import { useRouter } from 'next/navigation'
+import { useState } from 'react';
+import { supabase } from '@/lib/supabaseClient'; // Assuming you have set up Supabase client
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
-  const router = useRouter()
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
+    setIsLoading(true); // Start loading state
+
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
-    })
+    });
+
+    setIsLoading(false); // End loading state
 
     if (error) {
-      setError(error.message)
+      setError(error.message); // Show error message if login fails
     } else {
-      router.push('/dashboard') // redirect after login
+      router.push('/dashboard'); // Redirect to dashboard on successful login
     }
-  }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -48,10 +55,11 @@ export default function LoginPage() {
         <button
           type="submit"
           className="bg-blue-600 text-white w-full py-2 rounded hover:bg-blue-700"
+          disabled={isLoading} // Disable button during loading
         >
-          Login
+          {isLoading ? 'Logging in...' : 'Login'} {/* Show loading text */}
         </button>
       </form>
     </div>
-  )
+  );
 }

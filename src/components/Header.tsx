@@ -12,7 +12,7 @@ export default function Header() {
       </div></a>
       <nav className="space-x-4">
         <Link href="/dashboard" className="text-gray-700 hover:text-black">Dashboard</Link>
-        <Link href="/login" className="text-gray-700 hover:text-black">Login</Link>
+        <Link href="/dashboard/login" className="text-gray-700 hover:text-black">Login</Link>
       </nav>
     </header>
   )
