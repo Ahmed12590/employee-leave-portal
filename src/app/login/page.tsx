@@ -3,11 +3,11 @@
 'use client';
 
 import { useState } from 'react';
-import { supabase } from '@/lib/supabaseClient'; // Assuming you have set up Supabase client
+import { supabase } from '../../lib/supabaseBrowserClient'; 
 import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(''); 
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -52,13 +52,19 @@ export default function LoginPage() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button
-          type="submit"
-          className="bg-blue-600 text-white w-full py-2 rounded hover:bg-blue-700"
-          disabled={isLoading} // Disable button during loading
-        >
-          {isLoading ? 'Logging in...' : 'Login'} {/* Show loading text */}
-        </button>
+       <button
+  type="submit"
+  className="w-full py-2 rounded text-white"
+  style={{
+    backgroundColor: '#71a3c1',
+    opacity: isLoading ? 0.7 : 1,
+    cursor: isLoading ? 'not-allowed' : 'pointer',
+  }}
+  disabled={isLoading}
+>
+  {isLoading ? 'Logging in...' : 'Login'}
+</button>
+
       </form>
     </div>
   );
