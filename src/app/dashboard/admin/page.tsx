@@ -5,23 +5,39 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 
+// 1. Type for decoded JWT token
+type DecodedToken = {
+  role: string;
+};
+
+// 2. Type for each leave item
+type Leave = {
+  id: string;
+  reason: string;
+  fromDate: string;
+  toDate: string;
+  status: string;
+  user: {
+    name: string;
+  };
+};
 
 export default function AdminDashboard() {
-  const [leaves, setLeaves] = useState([]);
+  const [leaves, setLeaves] = useState<Leave[]>([]);
   const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) return router.push('/login');
 
-    const decoded: any = jwtDecode(token);
+    const decoded: DecodedToken = jwtDecode(token);
     if (decoded.role !== 'admin') return router.push('/login'); // not allowed
 
     fetchLeaves();
   }, []);
 
   const fetchLeaves = async () => {
-    const res = await axios.get('/api/admin/leaves');
+    const res = await axios.get<Leave[]>('/api/admin/leaves');
     setLeaves(res.data);
   };
 
@@ -44,7 +60,7 @@ export default function AdminDashboard() {
           </tr>
         </thead>
         <tbody>
-          {leaves.map((leave: any) => (
+          {leaves.map((leave) => (
             <tr key={leave.id}>
               <td className="border p-2">{leave.user.name}</td>
               <td className="border p-2">{leave.reason}</td>

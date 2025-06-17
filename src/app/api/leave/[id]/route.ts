@@ -1,13 +1,23 @@
 import { prisma } from '@/lib/prisma';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(_: any, { params }: { params: { id: string } }) {
+type RouteParams = {
+  params: {
+    id: string;
+  };
+};
+
+export async function GET(req: NextRequest, { params }: RouteParams) {
   const userId = parseInt(params.id);
-  const leaves = await prisma.leave.findMany({ where: { userId } });
+
+  const leaves = await prisma.leave.findMany({
+    where: { userId },
+  });
+
   return NextResponse.json(leaves);
 }
 
-export async function POST(req: Request, { params }: { params: { id: string } }) {
+export async function POST(req: NextRequest, { params }: RouteParams) {
   const userId = parseInt(params.id);
   const body = await req.json();
 
