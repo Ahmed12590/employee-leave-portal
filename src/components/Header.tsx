@@ -11,8 +11,9 @@ export default function Header() {
         <Image src="/logo.png" alt="Company Logo" width={80} height={80} />
       </div></a>
       <nav className="space-x-4">
+         <Link href="/signup" className="text-gray-700 hover:text-black">Sign up</Link>
         <Link href="/login" className="text-gray-700 hover:text-black">Login</Link>
-        <Link href="/signup" className="text-gray-700 hover:text-black">Sign up</Link>
+       
       </nav>
     </header>
   )

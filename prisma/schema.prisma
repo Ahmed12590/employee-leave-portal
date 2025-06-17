@@ -3,34 +3,27 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
-// Aapka pehle se likha model:
 model User {
-  id        String   @id @default(uuid())
-  name      String
-  email     String   @unique
-  role      Role
-  leaves    Leave[]
+  id       Int      @id @default(autoincrement())
+  name     String
+  email    String   @unique
+  password String
+  role     String   @default("employee")
+  leaves   Leave[]
   createdAt DateTime @default(now())
 }
 
 model Leave {
-  id        String   @id @default(uuid())
-  userId    String
-  type      String
+  id        Int      @id @default(autoincrement())
+  reason    String
   fromDate  DateTime
   toDate    DateTime
-  reason    String
-  status    String
+  status    String   @default("Pending")
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
-
-  user User @relation(fields: [userId], references: [id])
-}
-
-enum Role {
-  EMPLOYEE
-  ADMIN
 }

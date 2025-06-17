@@ -1,71 +1,50 @@
-// src/app/login/page.tsx
-
 'use client';
 
 import { useState } from 'react';
-import { supabase } from '../../lib/supabaseBrowserClient'; 
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
-export default function LoginPage() {
-  const [email, setEmail] = useState(''); 
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+export default function Login() {
+  const [form, setForm] = useState({ email: '', password: '' });
   const router = useRouter();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    setIsLoading(true); // Start loading state
-
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    setIsLoading(false); // End loading state
-
-    if (error) {
-      setError(error.message); // Show error message if login fails
-    } else {
-      router.push('/dashboard'); // Redirect to dashboard on successful login
-    }
+    const res = await axios.post('/api/auth/login', form);
+    localStorage.setItem('token', res.data.token);
+    router.push(`/dashboard/employee/${res.data.userId}`);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <form onSubmit={handleLogin} className="bg-white p-8 shadow-md rounded w-96">
-        <h2 className="text-2xl mb-4 font-semibold">Login</h2>
-        {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
-        <input
-          type="email"
-          placeholder="Email"
-          className="border p-2 w-full mb-4"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          className="border p-2 w-full mb-4"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-       <button
-  type="submit"
-  className="w-full py-2 rounded text-white"
-  style={{
-    backgroundColor: '#71a3c1',
-    opacity: isLoading ? 0.7 : 1,
-    cursor: isLoading ? 'not-allowed' : 'pointer',
-  }}
-  disabled={isLoading}
->
-  {isLoading ? 'Logging in...' : 'Login'}
-</button>
-
-      </form>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+      <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
+        <h2 className="text-2xl font-bold text-center mb-6">Welcome Back</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="email"
+            placeholder="Email"
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
+            className="w-full border border-gray-300 rounded-md p-2"
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            onChange={(e) => setForm({ ...form, password: e.target.value })}
+            className="w-full border border-gray-300 rounded-md p-2"
+            required
+          />
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+          >
+            Login
+          </button>
+        </form>
+        <p className="text-sm text-center mt-4">
+          Don’t have an account? <a href="/signup" className="text-blue-600">Sign Up</a>
+        </p>
+      </div>
     </div>
   );
 }
