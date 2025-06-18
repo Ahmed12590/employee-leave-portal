@@ -26,6 +26,7 @@ export default function EmployeeDashboard() {
     }
   };
 
+  
   const applyLeave = async () => {
     try {
       await axios.post(`/api/leave/${id}`, form);

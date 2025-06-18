@@ -8,13 +8,14 @@ datasource db {
 }
 
 model User {
-  id       Int      @id @default(autoincrement())
-  name     String
-  email    String   @unique
-  password String
-  role     String   @default("employee")
-  leaves   Leave[]
-  createdAt DateTime @default(now())
+  id        Int        @id @default(autoincrement())
+  name      String
+  email     String     @unique
+  password  String
+  role      String     @default("employee")
+  leaves    Leave[]
+  attendance Attendance[]
+  createdAt DateTime   @default(now())
 }
 
 model Leave {
@@ -25,5 +26,15 @@ model Leave {
   status    String   @default("Pending")
   userId    Int
   user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Attendance {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int      // Changed to Int to match User's id type
+  date      DateTime
+  checkIn   DateTime?
+  checkOut  DateTime?
   createdAt DateTime @default(now())
 }
