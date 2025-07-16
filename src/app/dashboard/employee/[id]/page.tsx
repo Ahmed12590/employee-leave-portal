@@ -153,6 +153,7 @@ export default function EmployeeDashboard() {
           onChange={e => setForm({ ...form, reason: e.target.value })}
           className="border w-full p-2"
         />
+        
         <input
           type="date"
           value={form.fromDate}
