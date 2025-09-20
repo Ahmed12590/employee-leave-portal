@@ -26,8 +26,7 @@ Built with **Next.js** + **TypeScript**, using a **SQL database** for storing da
 - Employees can submit leave requests  
 - Admin / Manager can approve or reject leave requests  
 - View status of leave (pending / approved / rejected)  
-- Leave history for each employee  
-- Notifications (email or in-app) for leave status changes (if implemented)  
+- Leave history for each employee   
 - Secure authentication & authorization  
 
 ---
