@@ -13,9 +13,6 @@ Built with **Next.js** + **TypeScript**, using a **SQL database** for storing da
 - [Getting Started](#getting-started)  
 - [Project Structure](#project-structure)  
 - [Environment Variables](#environment-variables)  
-- [Usage](#usage)  
-- [Learn More](#learn-more)  
-- [Deploy on Vercel](#deploy-on-vercel)  
 - [Contributing](#contributing)  
 - [License](#license)
 
