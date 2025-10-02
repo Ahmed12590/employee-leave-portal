@@ -44,7 +44,7 @@ This project uses a **SQL database**.
 
 | Aspect | Description |
 |---|---|
-| Database Type | e.g. PostgreSQL / MySQL / SQLite |
+| Database Type | MySQL |
 | Schema / Tables | Employees, LeaveRequests, LeaveTypes, Roles |
 | ORM / Query Library | Prisma / Sequelize / TypeORM (if applicable) |
 | Config | Environment variables (`DB_HOST`, `DB_USER`, `DB_PASS`, etc.) |
