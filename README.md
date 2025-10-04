@@ -13,7 +13,6 @@ Built with **Next.js** + **TypeScript**, using a **SQL database** for storing da
 - [Getting Started](#getting-started)  
 - [Project Structure](#project-structure)  
 - [Environment Variables](#environment-variables)  
-- [Contributing](#contributing)  
 - [License](#license)
 
 ---
