@@ -30,7 +30,7 @@ Built with **Next.js** + **TypeScript**, using a **SQL database** for storing da
 ## Tech Stack
 
 - **Frontend / Fullstack**: Next.js, React, TypeScript  
-- **Styling**: CSS / SCSS / Tailwind (depending on your setup)  
+- **Styling**: CSS / SCSS / Tailwind   
 - **Backend / API**: Next.js API routes  
 - **Database**: SQL (MySQL, or SQLite)  
 - **ORM / Data Layer**: Prisma / Sequelize / TypeORM (whichever you use)  
